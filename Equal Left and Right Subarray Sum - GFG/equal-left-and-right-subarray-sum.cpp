@@ -32,20 +32,21 @@ class Solution {
   public:
     int equalSum(int N, vector<int> &A) {
         // code here
-        int lsum=0;
-		for(int i=0;i<N;i++){
-		    lsum+=A[i];
-		}
-		int rsum=0;
-		for(int i = N-1; i >= 0; i--){
-		    rsum+=A[i];
-		    
-		    if(rsum==lsum){
-		        return i+1;
-		    }
-		    lsum-=A[i];
-		}
-		return -1;
+        vector<int>prefixSum(N+1),suffixSum(N+1);
+        prefixSum[0]=A[0];
+        for(int i=1;i<N;i++){
+            prefixSum[i]=prefixSum[i-1]+A[i];
+        }
+        suffixSum[N-1]=A[N-1];
+        for(int i=N-2;i>=0;i--){
+            suffixSum[i]=suffixSum[i+1]+A[i];
+        }
+        for(int i=0;i<N;i++){
+            if(prefixSum[i]==suffixSum[i])
+                return i+1;
+        }
+        return -1;
+        
     }
 };
 
