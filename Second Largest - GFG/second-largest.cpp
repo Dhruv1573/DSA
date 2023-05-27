@@ -11,7 +11,7 @@ public:
 	// largest elements
 	int print2largest(int arr[], int n) {
 	    // code here
-	    int prev=-1,curr=arr[0];
+	    int prev=-1,curr=INT_MIN;
     	for(int i=0;i<n;i++){
     		if(arr[i]>curr){
     			prev=curr;
@@ -20,6 +20,8 @@ public:
     		else if(arr[i]>prev && arr[i]<curr)
     			prev=arr[i];
     	}
+    	if(prev==INT_MIN)
+    	    return -1;
     	return prev;
 	}
 };
